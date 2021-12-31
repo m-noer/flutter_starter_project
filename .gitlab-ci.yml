@@ -1,0 +1,94 @@
+stages:
+  - test 
+  - build
+  - staging
+  - internal_test
+  - production
+
+variables:
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+
+.setup_fastlane_android:
+  image: ruby:2.6.5
+  before_script:
+    - cd android/
+    - gem install bundler
+    - bundle install
+  only: 
+    - production
+
+image: cirrusci/flutter:latest
+
+Test:
+  stage: test
+  before_script:
+    - flutter clean
+  script:
+    - flutter format --set-exit-if-changed lib test
+    - flutter analyze lib test
+    - flutter test --coverage
+    - lcov --remove coverage/lcov.info 'lib/*/*.g.dart' 'lib/core/**' -o coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  artifacts:
+    paths:
+      - coverage/
+    expire_in: 5 days
+  coverage: '/lines\.*: \d+\.\d+\%/'
+  tags:
+    - flutter
+
+build_android_staging:
+  stage: build
+  script: 
+    - echo "$STORE_FILE" | base64 --decode > android/key.jks
+    - flutter build apk --flavor staging -t lib/main_staging.dart
+  artifacts:
+    paths:
+      - build/app/outputs/apk/staging/release/app-staging-release.apk
+    expire_in: 1 day
+  only:
+    - staging
+
+build_android_production:
+  stage: build
+  script: 
+    - echo "$STORE_FILE" | base64 --decode > android/key.jks
+    - flutter build appbundle --flavor production -t lib/main_production.dart
+  artifacts:
+    paths:
+      - build/app/outputs/bundle/productionRelease/app-production-release.aab
+    expire_in: 1 day
+  only:
+    - production
+
+firebase_distribution:
+  stage: staging
+  extends: .setup_fastlane_android
+  dependencies: 
+    - build_android_staging
+  script:
+    - bundle exec fastlane firebase_distribution
+  only:
+    - staging
+
+android_play_store_internal:
+  stage: internal_test
+  extends: .setup_fastlane_android
+  dependencies:
+    - build_android_production
+  script:
+    - bundle exec fastlane upload_to_play_store_internal
+  only: 
+    - production
+
+android_play_store_production:
+  stage: production
+  extends: .setup_fastlane_android
+  dependencies:
+    - android_play_store_internal
+  script: bundle exec fastlane promote_internal_to_production
+  only: 
+    - production
+  when: manual
+  allow_failure: false

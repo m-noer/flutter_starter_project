@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "884086774954",
+    "project_id": "mejaseni-307114",
+    "storage_bucket": "mejaseni-307114.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884086774954:android:c248d1d85fea32bbbdc4d3",
+        "android_client_info": {
+          "package_name": "com.nerolab.varxcore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884086774954-nibpmr4kt2mlr70pdrqsg9l14qoqc663.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsbgMiqh_m7KGS6pGt9a3OVA1_RA-RVvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884086774954-nibpmr4kt2mlr70pdrqsg9l14qoqc663.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

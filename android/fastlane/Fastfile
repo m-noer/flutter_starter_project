@@ -1,0 +1,76 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  require ‘fileutils’
+  languages = ["en-US", "id"]
+
+  desc "deploy android to firebase distribution"
+  lane :firebase_distribution do
+    languages.each { |languageCode| prepareProductionChangelogs(languageCode)}
+    firebase_app_distribution(
+      app: ENV['FIREBASE_APP_ID'],
+      apk_path: "../build/app/outputs/apk/staging/release/app-staging-release.apk",
+      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+      release_notes_file: "fastlane/metadata/android/en-US/changelogs/#{flutter_version()["version_code"]}.txt",
+      testers_file: '../firebase_app_distribution/testers.txt',
+      groups_file: '../firebase_app_distribution/groups.txt'
+    )
+  end
+
+  desc "deploy android to internal testing play store"
+  lane :upload_to_play_store_internal do
+    languages.each { |languageCode| prepareProductionChangelogs(languageCode)}
+    supply(
+      aab: "../build/app/outputs/bundle/productionRelease/app-production-release.aab",
+      json_key_data: ENV['JSON_KEY_DATA'],
+      track: 'internal',
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      package_name: 'com.nerolab.varxcore'
+    )
+  end
+
+  desc "Promote internal to Production"
+  lane :promote_internal_to_production do
+    languages.each { |languageCode| prepareProductionChangelogs(languageCode)}
+    supply(
+      json_key_data: ENV['JSON_KEY_DATA'],
+      track: 'internal',
+      track_promote_to: 'production',
+      version_code: "#{flutter_version()["version_code"]}"
+    )
+  end
+
+  def prepareProductionChangelogs(languageCode)
+    puts "--- Preparing productive changelogs for language code '#{languageCode}' ---"
+    sharedChangelogs =  "./../../changelogs/#{languageCode}"
+    specificChangelogs = getSpecificChangelogsDirectory(languageCode)
+    createChangelogsFolder(specificChangelogs)
+    FileUtils.cp("#{sharedChangelogs}/release_notes.txt", "#{specificChangelogs}/#{flutter_version()["version_code"]}.txt")
+  end
+
+  def createChangelogsFolder(changelogsDirectory)
+    FileUtils.mkdir_p changelogsDirectory
+  end
+
+  def getSpecificChangelogsDirectory(languageCode)
+    "./metadata/android/#{languageCode}/changelogs"
+  end
+
+end
