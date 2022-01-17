@@ -102,7 +102,7 @@ class _PasswordField extends StatelessWidget {
         obscureText: obscure.value,
         decoration: InputDecoration(
           hintText: labels.form.password,
-          prefixIcon: const Icon(FluentIcons.password_24_regular),
+          prefixIcon: const Icon(FluentIcons.lock_closed_24_regular),
           suffixIcon: IconButton(
             key: const Key('obscureButton'),
             onPressed: () {

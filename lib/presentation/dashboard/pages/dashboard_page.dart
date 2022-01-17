@@ -30,7 +30,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('VarX'),
+        title: const Text('Nerolab'),
         actions: [
           IconButton(
             onPressed: () {

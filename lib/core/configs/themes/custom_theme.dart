@@ -28,19 +28,19 @@ class CustomTheme {
     contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
     enabledBorder: UnderlineInputBorder(
       borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
     ),
     alignLabelWithHint: true,
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(color: Colors.red, width: 0),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       borderSide: const BorderSide(color: Colors.red, width: 0),
     ),
     hintStyle: const TextStyle(color: Colors.grey),
@@ -52,7 +52,7 @@ class CustomTheme {
       primary: Palette.primaryColor,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
     ),
   );
@@ -62,7 +62,7 @@ class CustomTheme {
       primary: Palette.primaryColor,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
       side: const BorderSide(
         color: Palette.primaryColor,
@@ -78,7 +78,7 @@ class CustomTheme {
       primary: Palette.primaryColor,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
       side: const BorderSide(
         color: Palette.primaryColorLight,
@@ -140,7 +140,7 @@ class CustomTheme {
       margin: const EdgeInsets.only(bottom: 10),
       elevation: 6,
       shadowColor: Colors.black.withOpacity(0.1),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
@@ -203,7 +203,7 @@ class CustomTheme {
       margin: const EdgeInsets.only(bottom: 10),
       elevation: 6,
       shadowColor: Colors.black.withOpacity(0.1),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonThemeDark,
