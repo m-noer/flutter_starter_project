@@ -6,6 +6,10 @@ format:
 test:
 	flutter test --coverage
 
+.Nero: integrate_test
+integrate_test:
+	flutter drive --flavor staging --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart
+
 .Nero: feature
 feature:
 	mason make nero_feature -c assets/json/$(name).json -o lib
