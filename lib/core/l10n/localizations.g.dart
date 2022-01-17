@@ -8,6 +8,8 @@ part of 'localizations.dart';
 
 final localizedLabels = <Locale, AppLocalizationsData>{
   Locale.fromSubtags(languageCode: 'id'): const AppLocalizationsData(
+    homeCourse: 'Home Course',
+    onlineCourse: 'Kelas Online',
     newEvents: 'Event Terbaru',
     noDataFound: 'Tidak Ada Data',
     profile: 'Profil',
@@ -36,6 +38,8 @@ final localizedLabels = <Locale, AppLocalizationsData>{
     ),
   ),
   Locale.fromSubtags(languageCode: 'en'): const AppLocalizationsData(
+    homeCourse: 'Home Course',
+    onlineCourse: 'Online Course',
     newEvents: 'New Events',
     noDataFound: 'No Data Found',
     profile: 'Profile',
@@ -67,6 +71,8 @@ final localizedLabels = <Locale, AppLocalizationsData>{
 
 class AppLocalizationsData {
   const AppLocalizationsData({
+    required this.homeCourse,
+    required this.onlineCourse,
     required this.newEvents,
     required this.noDataFound,
     required this.profile,
@@ -80,6 +86,8 @@ class AppLocalizationsData {
     required this.auth,
   });
 
+  final String homeCourse;
+  final String onlineCourse;
   final String newEvents;
   final String noDataFound;
   final String profile;
@@ -93,6 +101,8 @@ class AppLocalizationsData {
   final AppLocalizationsDataAuth auth;
   factory AppLocalizationsData.fromJson(Map<String, Object?> map) =>
       AppLocalizationsData(
+        homeCourse: map['homeCourse']! as String,
+        onlineCourse: map['onlineCourse']! as String,
         newEvents: map['newEvents']! as String,
         noDataFound: map['noDataFound']! as String,
         profile: map['profile']! as String,
@@ -110,6 +120,8 @@ class AppLocalizationsData {
       );
 
   AppLocalizationsData copyWith({
+    String? homeCourse,
+    String? onlineCourse,
     String? newEvents,
     String? noDataFound,
     String? profile,
@@ -123,6 +135,8 @@ class AppLocalizationsData {
     AppLocalizationsDataAuth? auth,
   }) =>
       AppLocalizationsData(
+        homeCourse: homeCourse ?? this.homeCourse,
+        onlineCourse: onlineCourse ?? this.onlineCourse,
         newEvents: newEvents ?? this.newEvents,
         noDataFound: noDataFound ?? this.noDataFound,
         profile: profile ?? this.profile,
@@ -140,6 +154,8 @@ class AppLocalizationsData {
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AppLocalizationsData &&
+          homeCourse == other.homeCourse &&
+          onlineCourse == other.onlineCourse &&
           newEvents == other.newEvents &&
           noDataFound == other.noDataFound &&
           profile == other.profile &&
@@ -154,6 +170,8 @@ class AppLocalizationsData {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      homeCourse.hashCode ^
+      onlineCourse.hashCode ^
       newEvents.hashCode ^
       noDataFound.hashCode ^
       profile.hashCode ^

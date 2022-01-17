@@ -35,6 +35,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     final labels = context.localizations;
+    final size = MediaQuery.of(context).size;
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
@@ -56,8 +57,9 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const SizedBox(height: 28),
                     SizedBox(
-                      height: Get.height / 2.5,
+                      height: size.height / 4,
                       child: Image.asset(
                         AssetsConstants.logo,
                         fit: BoxFit.contain,
@@ -70,7 +72,6 @@ class _LoginViewState extends State<LoginView> {
                       passwordController: passwordController,
                       onLogin: onLogin,
                     ),
-                    const SizedBox(height: 20),
                   ],
                 ),
               ),

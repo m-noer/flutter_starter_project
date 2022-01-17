@@ -1,23 +1,27 @@
-.PHONY: format
+.Nero: format
 format:
 	flutter format lib test
 
-.PHONY: test
+.Nero: test
 test:
 	flutter test --coverage
 
-.PHONY: feature
+.Nero: feature
 feature:
 	mason make nero_feature -c assets/json/$(name).json -o lib
 
-.PHONY: analyze
+.Nero: analyze
 analyze:
 	flutter analyze lib test
 
-.PHONY: runner
+.Nero: runner
 runner:
 	flutter pub run build_runner build --delete-conflicting-outputs
 
-.PHONY: build_runner
+.Nero: build_runner
 build_runner:
 	flutter pub run build_runner build
+
+.Nero: icon
+icon:
+	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*

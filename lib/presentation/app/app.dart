@@ -8,7 +8,6 @@ import 'package:flutter_starter_project/core/l10n/localizations.dart';
 import 'package:flutter_starter_project/core/utils/services/shared_prefs.dart';
 import 'package:flutter_starter_project/presentation/auth/pages/login_page.dart';
 import 'package:flutter_starter_project/presentation/dashboard/pages/dashboard_page.dart';
-import 'package:flutter_starter_project/presentation/onboard/pages/onboarding_page.dart';
 import 'package:get/get.dart';
 
 class App extends StatelessWidget {
@@ -19,19 +18,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLogin = prefs.isKeyExists(KeyConstants.keyAccessToken);
-    final onBoard = prefs.getBool(KeyConstants.keyOnBoard) ?? false;
 
     final routeObserver = Get.put<RouteObserver>(RouteObserver<PageRoute>());
 
     String initialRoute() {
-      if (onBoard) {
-        if (isLogin) {
-          return DashboardPage.route;
-        } else {
-          return LoginPage.route;
-        }
+      if (isLogin) {
+        return DashboardPage.route;
       } else {
-        return OnBoardingPage.route;
+        return LoginPage.route;
       }
     }
 
