@@ -51,20 +51,20 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/main_development.dart
+flutter run --flavor development --target lib/main_development.dart
 
 # Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
+flutter run --flavor staging --target lib/main_staging.dart
 
 # Production
-$ flutter run --flavor production --target lib/main_production.dart
+flutter run --flavor production --target lib/main_production.dart
 ```
 
 Before you push your local branch to remote branch always do this steps:
 
 ```sh
-$ flutter format lib test
-$ flutter analyze lib test
+flutter format lib test
+flutter analyze lib test
 ```
 
 _\*Flutter Starter Project works on iOS, Android, and Web._
@@ -146,8 +146,8 @@ Test stage will run in all branchs and do this scripts
 If when run `flutter format --set-exit-if-changed lib test` must no file changed or Gitlab CI will return fail, and make sure **no error** or **warning** in this project. So before you push the project to remote you need run this in your local branch
 
 ```sh
-$ flutter format lib test
-$ flutter analyze lib test
+flutter format lib test
+flutter analyze lib test
 ```
 
 ##### 2. Build
@@ -173,20 +173,20 @@ Production stage will promote app from internal test to production. You need run
 To run all unit and widget tests use the following command:
 
 ```sh
-$ flutter test --coverage
+flutter test --coverage
 ```
 
 To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
 
 ```sh
 # Remove core file and generated file to get actual coverage
-$ lcov --remove coverage/lcov.info 'lib/*/*.g.dart' 'lib/core/**' -o coverage/lcov.info
+lcov --remove coverage/lcov.info 'lib/*/*.g.dart' 'lib/core/**' -o coverage/lcov.info
 
 # Generate Coverage Report
-$ genhtml coverage/lcov.info -o coverage/
+genhtml coverage/lcov.info -o coverage/
 
 # Open Coverage Report
-$ open coverage/index.html
+open coverage/index.html
 ```
 
 ---
@@ -204,12 +204,12 @@ Go to the [Firebase Console](http://console.firebase.google.com/), and create a
 Create an APK using Gradle:
 
 ```bash
-$ pushd android
+pushd android
 # flutter build generates files in android/ for building the app
-$ flutter build apk --flavor staging -t lib/main_staging.dart
-$ ./gradlew app:assembleAndroidTest
-$ ./gradlew app:assembleDebug -Ptarget=integration_test/<name>_test.dart
-$ popd
+flutter build apk --flavor staging -t lib/main_staging.dart
+./gradlew app:assembleAndroidTest
+./gradlew app:assembleDebug -Ptarget=integration_test/<name>_test.dart
+popd
 ```
 
 Where `<name>_test.dart` is the file created in the **Project Setup** section.
@@ -316,7 +316,7 @@ class AppLocalizationsDelegate
 Run the following command to generate a `lib/l10n/localization.g.dart` file :
 
 ```sh
-$ flutter packages pub run build_runner build
+flutter packages pub run build_runner build
 ```
 
 #### 4. Display your labels
@@ -336,7 +336,7 @@ print(labels.templated.contact(Gender.male, lastName: "John"));
 Generate launcher icon for android and ios
 
 ```shell
-$ flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
+flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
 ```
 
 ## Generate Splashscreen Android IOS
@@ -344,7 +344,7 @@ $ flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
 Generate splashscreen for android and ios
 
 ```shell
-$ flutter pub run flutter_native_splash:create
+flutter pub run flutter_native_splash:create
 ```
 
 [coverage_badge]: coverage_badge.svg
